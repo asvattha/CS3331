@@ -12,4 +12,8 @@ public class Animal {
         return name;
     }
 
+    public void speak(){
+        System.out.println("???");
+    }
+
 }

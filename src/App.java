@@ -33,6 +33,7 @@ public class App {
 
         for(Animal a: animals){
             System.out.println(a.getName());
+            a.speak();
         }
 
     }
