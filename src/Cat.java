@@ -1,13 +1,10 @@
 import java.util.ArrayList;
 
-public class Cat {
+public class Cat extends Animal{
    String name;
    
    public Cat(String name){
-    this.name = name;
+    super(name);
    }
 
-   public String getName(){
-    return name;
-   }
 }
