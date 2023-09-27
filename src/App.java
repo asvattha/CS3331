@@ -1,8 +1,22 @@
 import java.util.ArrayList;
+import InclassPractice.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
+        Living var1 = new Cat();
+        Animal var2 = new Dog();
+        Living var3 = new Animal();
+        Object var4 = new Animal();
+
+        //var1.a();
+        //var1.b();
+        //var1.c();
+        //var2.b();
+        //((Cat)var1).b();
+        ((Living)var4).b();
+
+        /* 
         ArrayList<Animal> animals = new ArrayList<>();
         
         Cat c1 = new Cat("Tom");
@@ -21,20 +35,11 @@ public class App {
         animals.add(d2);
         animals.add(d3);
 
-        /* 
-        for (Cat c: cats) {
-            System.out.println(c.getName());
-        }
-
-        for (Dog d: dogs) {
-            System.out.println(d.getName());
-        }
-        */
-
         for(Animal a: animals){
             System.out.println(a.getName());
             a.speak();
         }
+        */
 
     }
 }
