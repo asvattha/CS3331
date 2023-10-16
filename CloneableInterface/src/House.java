@@ -43,4 +43,11 @@ public class House implements Cloneable, Comparable<House>{
         else
             return 0;
     }
+
+    
+    @Override
+    public String toString(){
+        return Double.toString(area); 
+    }
+    
 }
