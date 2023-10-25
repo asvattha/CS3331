@@ -1,4 +1,8 @@
+import org.w3c.dom.events.Event;
+
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,8 +25,8 @@ public class App extends Application{
         hBox.getChildren().add(btEnlarge);
         hBox.getChildren().add(btShrink);
 
-        btEnlarge.setOnAction(new EnlargeHandler(circlePane));
-        btShrink.setOnAction(new ShrinkHandler(circlePane));
+        btEnlarge.setOnAction(new EnlargeHandler());
+        btShrink.setOnAction(new ShrinkHandler());
 
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(circlePane);
@@ -34,6 +38,21 @@ public class App extends Application{
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    class EnlargeHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent e){
+            circlePane.enlarge();
+        }
+    }
+
+    class ShrinkHandler implements EventHandler<ActionEvent> {
+        @Override
+        public void handle(ActionEvent e){
+            circlePane.shrink();
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         Application.launch(args);
     }
