@@ -25,19 +25,9 @@ public class App extends Application{
         hBox.getChildren().add(btEnlarge);
         hBox.getChildren().add(btShrink);
 
-        btEnlarge.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent e){
-                circlePane.enlarge();
-            }
-        });
+        btEnlarge.setOnAction(e -> circlePane.enlarge());
 
-        btShrink.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent e){
-                circlePane.shrink();
-            }
-        });
+        btShrink.setOnAction(e -> circlePane.shrink());
 
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(circlePane);
