@@ -25,8 +25,19 @@ public class App extends Application{
         hBox.getChildren().add(btEnlarge);
         hBox.getChildren().add(btShrink);
 
-        btEnlarge.setOnAction(new EnlargeHandler());
-        btShrink.setOnAction(new ShrinkHandler());
+        btEnlarge.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                circlePane.enlarge();
+            }
+        });
+
+        btShrink.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent e){
+                circlePane.shrink();
+            }
+        });
 
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(circlePane);
@@ -37,20 +48,6 @@ public class App extends Application{
         primaryStage.setTitle("Control Circle");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    class EnlargeHandler implements EventHandler<ActionEvent> {
-        @Override
-        public void handle(ActionEvent e){
-            circlePane.enlarge();
-        }
-    }
-
-    class ShrinkHandler implements EventHandler<ActionEvent> {
-        @Override
-        public void handle(ActionEvent e){
-            circlePane.shrink();
-        }
     }
 
     public static void main(String[] args) throws Exception {
