@@ -13,13 +13,12 @@ public class App extends Application{
         myPane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.RIGHT || e.getCode() == KeyCode.LEFT){
                 myPane.movePaddle(e);
-                
+            }
+
+            else if (e.getCode() == KeyCode.ENTER){
+                myPane.play();
             }
         });
-
-
-
-
 
         Scene scene = new Scene(myPane, 1000, 700);
         
