@@ -1,3 +1,5 @@
+import java.util.Vector;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.Pane;
@@ -9,8 +11,9 @@ import javafx.util.Pair;
 public class Bricks extends Pane{
     
     int rows = 3, cols = 7;
-    Rectangle bricks[][] = new Rectangle[rows][cols];
-    int hit[][] = new int[rows][cols];
+    //Rectangle bricks[][] = new Rectangle[rows][cols];
+    //int hit[][] = new int[rows][cols];
+    Vector<Rectangle> bricks = new Vector<>();
     double brickX = 230, brickY = 100, brickWidth = 80, brickHeight = 30;
 
     IntegerProperty scoreProperty = new SimpleIntegerProperty();
@@ -18,10 +21,11 @@ public class Bricks extends Pane{
     public Bricks(){
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < cols; j++){
-                bricks[i][j] = new Rectangle(brickX + j*brickWidth, brickY + i*brickHeight, brickWidth, brickHeight);
-                bricks[i][j].setStroke(Color.WHITE);
-                getChildren().add(bricks[i][j]);
-                hit[i][j] = 1;
+                Rectangle rectangle = new Rectangle(brickX + j*brickWidth, brickY + i*brickHeight, brickWidth, brickHeight);
+                rectangle.setStroke(Color.WHITE);
+                getChildren().add(rectangle);
+                bricks.add(rectangle);
+                //hit[i][j] = 1;
             }
         }
     }
@@ -33,27 +37,25 @@ public class Bricks extends Pane{
     public Pair<Boolean,String> intersects(Circle ball){
         Pair<Boolean, String> result = new Pair<Boolean, String>(false, "");
 
-        for (int i = 0; i < rows; i++){
-            for (int j = 0; j < cols; j++){
-                if (hit[i][j] == 1){
-                    if (bricks[i][j].intersects(ball.getBoundsInLocal())){
+        for (Rectangle r : bricks){
+                    if (r.intersects(ball.getBoundsInLocal())){
                         scoreProperty.setValue(scoreProperty.getValue() + 5);
                         if (
-                            (ball.getCenterY() - ball.getRadius() <= bricks[i][j].getY() + bricks[i][j].getHeight() || 
-                            ball.getCenterY() + ball.getRadius() >= bricks[i][j].getY()) 
+                            (ball.getCenterY() - ball.getRadius() <= r.getY() + r.getHeight() || 
+                            ball.getCenterY() + ball.getRadius() >= r.getY()) 
                             && 
-                            (ball.getCenterX() >= bricks[i][j].getX() &&
-                            ball.getCenterX() <= bricks[i][j].getX() + bricks[i][j].getWidth())
+                            (ball.getCenterX() >= r.getX() &&
+                            ball.getCenterX() <= r.getX() + r.getWidth())
                         ) {
                             result = new Pair<Boolean,String>(true, "y");
                         }
                         
                         else if (
-                            (ball.getCenterX() - ball.getRadius() <= bricks[i][j].getX() + bricks[i][j].getWidth() || 
-                            ball.getCenterX() + ball.getRadius() >= bricks[i][j].getX()) 
+                            (ball.getCenterX() - ball.getRadius() <= r.getX() + r.getWidth() || 
+                            ball.getCenterX() + ball.getRadius() >= r.getX()) 
                             && 
-                            (ball.getCenterY() >= bricks[i][j].getY() &&
-                            ball.getCenterY() <= bricks[i][j].getY() + bricks[i][j].getHeight())
+                            (ball.getCenterY() >= r.getY() &&
+                            ball.getCenterY() <= r.getY() + r.getHeight())
                         ){
                             result =  new Pair<Boolean,String>(true, "x");
                         }
@@ -61,12 +63,13 @@ public class Bricks extends Pane{
                             result = new Pair<Boolean,String>(true, "y");
                         }
 
-                        getChildren().remove(bricks[i][j]);
-                        hit[i][j] = 0;
+                        getChildren().remove(r);
+                        bricks.remove(r);
+                        //hit[i][j] = 0;
                         return result;
                     }
-                }
-            }
+                //}
+            
         }
         return result;
     }
