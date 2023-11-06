@@ -19,9 +19,11 @@ public class GamePane extends Pane{
 
     Timeline ballAnimation;
 
+    Bricks bricks = new Bricks();
+
     public GamePane(){
-        getChildren().addAll(ball, paddle);
-        ballAnimation = new Timeline(new KeyFrame(new Duration(10), e->moveBall()));
+        getChildren().addAll(ball, paddle, bricks);
+        ballAnimation = new Timeline(new KeyFrame(new Duration(5), e->moveBall()));
         ballAnimation.setCycleCount(Timeline.INDEFINITE);
     }
 
@@ -60,5 +62,7 @@ public class GamePane extends Pane{
         ball.setCenterX(ballX);
         ball.setCenterY(ballY);
     }
+
+
     
 }
