@@ -1,3 +1,5 @@
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -11,6 +13,8 @@ public class Bricks extends Pane{
     int hit[][] = new int[rows][cols];
     double brickX = 230, brickY = 100, brickWidth = 80, brickHeight = 30;
 
+    IntegerProperty scoreProperty = new SimpleIntegerProperty();
+
     public Bricks(){
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < cols; j++){
@@ -22,6 +26,10 @@ public class Bricks extends Pane{
         }
     }
 
+    public IntegerProperty scoreProperty(){
+        return scoreProperty;
+    }
+
     public Pair<Boolean,String> intersects(Circle ball){
         Pair<Boolean, String> result = new Pair<Boolean, String>(false, "");
 
@@ -29,6 +37,7 @@ public class Bricks extends Pane{
             for (int j = 0; j < cols; j++){
                 if (hit[i][j] == 1){
                     if (bricks[i][j].intersects(ball.getBoundsInLocal())){
+                        scoreProperty.setValue(scoreProperty.getValue() + 5);
                         if (
                             (ball.getCenterY() - ball.getRadius() <= bricks[i][j].getY() + bricks[i][j].getHeight() || 
                             ball.getCenterY() + ball.getRadius() >= bricks[i][j].getY()) 

@@ -1,5 +1,6 @@
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -72,6 +73,10 @@ public class GamePane extends Pane{
         ballY += dy;
         ball.setCenterX(ballX);
         ball.setCenterY(ballY);
+    }
+
+    public IntegerProperty scoreProperty(){
+        return bricks.scoreProperty();
     }
     
 }
