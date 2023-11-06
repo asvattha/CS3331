@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import javafx.util.Pair;
 
 public class GamePane extends Pane{
 
@@ -44,15 +45,25 @@ public class GamePane extends Pane{
     }
 
     public void moveBall(){
+        Pair<Boolean, String> result = bricks.intersects(ball);
         if(ballY - radius < 0){
             dy *= -1;
         }
         else if (ballX + radius > getWidth() || ballX - radius < 0){
             dx *= -1;
         }
-        else if (ball.intersects(paddle.getBoundsInLocal())){
+        else if (paddle.intersects(ball.getBoundsInLocal())){
             dy *= -1;
         }
+        else if (result.getKey() == true){
+            if (result.getValue().equals("y")){
+                dy *= -1;
+            }
+            else{
+                dx *= -1;
+            }
+        }
+
         else if (ballY + radius > getHeight()){
             ballAnimation.stop();
         }
@@ -62,7 +73,5 @@ public class GamePane extends Pane{
         ball.setCenterX(ballX);
         ball.setCenterY(ballY);
     }
-
-
     
 }
